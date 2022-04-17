@@ -30,6 +30,7 @@ class RNN(nn.Module):
 
     def forward(self, f):
         # F est de dimension [5,32,32,1]
+        print('f.shape: ', f.shape)
         f = f.view(5, 1, -1)
         output, self.hidden = self.LSTM(f, self.hidden)
         R = self.fc(output)

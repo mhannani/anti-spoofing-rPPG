@@ -1,5 +1,6 @@
 from torch.nn import Module
 from torch import save
+import os
 
 
 def save_checkpoints(model: Module, epoch: int) -> None:
@@ -12,5 +13,10 @@ def save_checkpoints(model: Module, epoch: int) -> None:
     :return: None
     """
 
-    save(model, f'model_epoch_{epoch}')
+    # check if the pretrained folder exists
+    if not os.path.exists('pretrained'):
+        os.mkdir('pretrained')
+
+    # save the model
+    save(model, f'pretrained/model_epoch_{epoch}.pt')
 

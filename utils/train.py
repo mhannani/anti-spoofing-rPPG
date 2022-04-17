@@ -6,9 +6,10 @@ from torch.utils.data import DataLoader
 from utils.NPZ_loader import NPZLoader
 from models.Cnn_Rnn import CnnRnn
 from utils.split import get_sets
+from utils.save import save_checkpoints
 
 
-def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.003, net: str = 'cnn'):
+def train(n_epochs: int = 1, data_path: str = './Data', train_test_split: float = 0.003, net: str = 'rnn'):
     """
     Training process
 
@@ -17,7 +18,7 @@ def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float
     :param data_path: str
         The path to the data
     :param train_test_split: float
-        The proportion of the trainset
+        The proportion of the training set
     :param net: str
         The network to train, 'cnn' for CNN, 'rnn' for RNN, 'both' for both
     :return: None
@@ -65,19 +66,28 @@ def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float
 
         for i, data in enumerate(train_data):
             # unpacking
-            images, labels_d, anchors, _ = data
+            images, labels_d, anchors, label = data
 
             # initialize gradients
             optimizer.zero_grad()
 
             # forward pass
-            output_d, _ = model(images, False, anchors)
+            if net == 'cnn':
+                output_d, _ = model(images, False, anchors)
 
-            # compute the loss
-            loss = criterion(torch.transpose(output_d, 1, 3), labels_d)
+                # compute the loss
+                loss = criterion(torch.transpose(output_d, 1, 3), labels_d)
+            else:
+                _, output_f = model(images, False, anchors)
+                # compute the loss
+                print(output_f.shape, label.shape)
+                loss = criterion(output_f, torch.zeros((5, 1, 2), dtype=torch.float32))
 
             # backward propagation
             loss.backward()
+
+            # Performs single optimization step
+            optimizer.step()
 
             # TODO: ADD CLIP GRADIENT FOR STABLE NETWORK
             # TODO: from torch.nn.utils import clip_grad_norm_
@@ -91,7 +101,7 @@ def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float
 
             # update the progress bar
             p_bar.set_postfix(
-                epoch=f" {epoch}/{n_epochs}, train loss= {round(sum(running_loss) / len(running_loss), 2)}",
+                epoch=f"{epoch}/{n_epochs}, train loss= {round(sum(running_loss) / len(running_loss), 2)}",
                 refresh=True)
 
             # update the progress bar
@@ -100,3 +110,5 @@ def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float
         # close progress bar
         p_bar.close()
 
+        # saving model/models
+        save_checkpoints(model, epoch)

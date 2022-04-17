@@ -24,6 +24,7 @@ class CnnRnn(nn.Module):
         non_rigid_registration = torch.where(depth_map >= self.threshold, torch.ones(5, 1, 32, 32), torch.zeros(5, 1, 32, 32))
 
         u = feature_map * non_rigid_registration
+
         if turned:
             f = turning(u, anchors)
         else:
