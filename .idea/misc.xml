@@ -8,6 +8,34 @@
           <option name="caretOffset" value="0" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/README.md" />
         </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="56" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/train.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="1792" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/train_beta.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="3648" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/models/CNN.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="115" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/models/LSTM.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="129" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/models/Cnn_Rnn.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="1983" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/NPZ_loader.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="704" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/train.py" />
+        </OpenedFileInfo>
       </list>
     </option>
   </component>
