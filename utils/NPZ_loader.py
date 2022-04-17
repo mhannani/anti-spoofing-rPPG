@@ -25,7 +25,7 @@ class NPZLoader(Dataset):
         self.path = path
 
         # Get all files with nzp extension
-        self.files = list(Path(path).glob('**/*.npz'))
+        self.files = list(sorted(Path(path).glob('**/*.npz')))
 
         # Get anchors from npz fil
         self.anchors_npz = np.load(str(self.files[0]))
@@ -70,8 +70,10 @@ class NPZLoader(Dataset):
         # Get label_d from npz file
         self.label_d_npz = np.load(str(self.files[3]))
 
-        return np.transpose(self.images_npz['{}'.format(item)].astype(np.float32), (2, 0, 1)), self.label_d_npz['{}'.format(item)].astype(np.float32), \
-            self.anchors_npz['{}'.format(item)].astype(np.float32), self.label_npz['{}'.format(item)].astype(np.float32),
+        return np.transpose(self.images_npz['{}'.format(item)].astype(np.float32), (2, 0, 1)), \
+            self.label_d_npz['{}'.format(item)].astype(np.float32), \
+            self.anchors_npz['{}'.format(item)].astype(np.float32), \
+            self.label_npz['{}'.format(item)].astype(np.float32)
 
     def __call__(self):
         """
@@ -94,3 +96,4 @@ if __name__ == "__main__":
     for i, data in enumerate(data_loader):
         a, b, c, d = data
         print(a.shape, b.shape, c.shape, d.shape)
+        break
