@@ -3,7 +3,7 @@ import torch.nn as nn
 import numpy as np
 import torchvision
 from models.CNN import CNN
-from models.LSTM import LSTM
+from models.LSTM import RNN
 
 
 class CnnRnn(nn.Module):
@@ -13,20 +13,24 @@ class CnnRnn(nn.Module):
 
         self.threshold = 0.1
         self.CNN = CNN()
-        self.RNN = LSTM()
+        self.RNN = RNN()
 
     def forward(self, x, turned, anchors):
 
-        D, T = self.CNN(x)
+        # depth map, feature map
+        depth_map, feature_map = self.CNN(x)
+
         # Non_rigid_registration_layer
-        V = torch.where(D >= self.threshold, torch.ones(5, 1, 32, 32), torch.zeros(5, 1, 32, 32))
-        U = T * V
-        if (turned):
-            F = turning(U, anchors)
+        non_rigid_registration = torch.where(depth_map >= self.threshold, torch.ones(5, 1, 32, 32), torch.zeros(5, 1, 32, 32))
+
+        u = feature_map * non_rigid_registration
+        if turned:
+            f = turning(u, anchors)
         else:
-            F = U
-        R = self.RNN(F)
-        return D, R
+            f = u
+
+        rppg = self.RNN(f)
+        return depth_map, rppg
 
 
 def turning(U, anchors, treshold=0.1):

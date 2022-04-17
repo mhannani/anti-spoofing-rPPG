@@ -9,19 +9,19 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/train.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="3008" />
+          <option name="caretOffset" value="6552" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/train_beta.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="3648" />
+          <option name="caretOffset" value="1951" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/models/CNN.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="90" />
+          <option name="caretOffset" value="1018" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/models/LSTM.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="2018" />
+          <option name="caretOffset" value="2254" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/NPZ_loader.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
@@ -29,7 +29,11 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/README.md" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="0" />
+          <option name="caretOffset" value="741" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/models/Cnn_Rnn.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="1367" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/train.py" />
         </OpenedFileInfo>
       </list>

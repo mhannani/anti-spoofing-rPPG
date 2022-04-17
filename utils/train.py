@@ -1,9 +1,9 @@
+import torch.nn as nn
 import torch.optim
+
+from tqdm import tqdm
 from torch.utils.data import DataLoader
 from utils.NPZ_loader import NPZLoader
-import torch.nn as nn
-
-# to be modified
 from models.Cnn_Rnn import CnnRnn
 
 
@@ -16,9 +16,12 @@ def train(n_epochs: int = 10, data_path: str = './Data', net: str = 'cnn'):
     :param data_path: str
         The path to the data
     :param net: str
-        The network to train, 'cnn' for CNN, 'rnn' for RNN
+        The network to train, 'cnn' for CNN, 'rnn' for RNN, 'both' for both
     :return: None
     """
+
+    if net not in ['cnn', 'rnn', 'both']:
+        raise NotImplemented('Net value is not implemented')
 
     # Get data
     dataset = NPZLoader(data_path)
@@ -40,7 +43,13 @@ def train(n_epochs: int = 10, data_path: str = './Data', net: str = 'cnn'):
 
     # Training loop
     for epoch in range(n_epochs):
-        running_loss = 0.0
+        # training loss tracker
+        running_loss = []
+
+        # progress bar
+        p_bar = tqdm(total=len(train_data), bar_format='{l_bar}{bar:10}{r_bar}',
+                     unit=' batches', ncols=200, mininterval=0.05, colour='#00ff00')
+
         for i, data in enumerate(train_data):
             # unpacking
             images, labels_d, anchors, _ = data
@@ -52,15 +61,29 @@ def train(n_epochs: int = 10, data_path: str = './Data', net: str = 'cnn'):
             output_d, _ = model(images, False, anchors)
 
             # compute the loss
-            loss = criterion(output_d, labels_d)
+            loss = criterion(torch.transpose(output_d, 1, 3), labels_d)
 
             # backward propagation
-            loss.backward(retain_graph=True)
+            loss.backward()
+
+            # TODO: ADD CLIP GRADIENT FOR STABLE NETWORK
+            # TODO: from torch.nn.utils import clip_grad_norm_
+            # TODO: clip_grad_norm_(model.parameters(), 1)
 
             # compute statistics
             total += labels_d.size(0)
 
             # accumulate loss values
-            running_loss += loss.item()
+            running_loss.append(loss.item())
 
-    raise NotImplemented('Not yet finished...')
+            # update the progress bar
+            p_bar.set_postfix(
+                epoch=f" {epoch}/{n_epochs}, train loss= {round(sum(running_loss) / len(running_loss), 2)}",
+                refresh=True)
+
+            # update the progress bar
+            p_bar.update()
+
+        # close progress bar
+        p_bar.close()
+

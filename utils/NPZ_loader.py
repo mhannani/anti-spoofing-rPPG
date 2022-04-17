@@ -14,7 +14,7 @@ class NPZLoader(Dataset):
 
     def __init__(self, path):
         """
-        The class init function.
+        The class init function
 
         :param path: str
             Absolute path to the data folder.
