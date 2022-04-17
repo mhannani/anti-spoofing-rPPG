@@ -2,6 +2,7 @@ import torch
 import numpy as np
 from pathlib import Path
 from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import random_split
 
 
 class NPZLoader(Dataset):
@@ -58,18 +59,6 @@ class NPZLoader(Dataset):
         :return: None
         """
 
-        # Get anchors from npz fil
-        self.anchors_npz = np.load(str(self.files[0]))
-
-        # Get images from npz file
-        self.images_npz = np.load(str(self.files[1]))
-
-        # Get label from npz file
-        self.label_npz = np.load(str(self.files[2]))
-
-        # Get label_d from npz file
-        self.label_d_npz = np.load(str(self.files[3]))
-
         return np.transpose(self.images_npz['{}'.format(item)].astype(np.float32), (2, 0, 1)), \
             self.label_d_npz['{}'.format(item)].astype(np.float32), \
             self.anchors_npz['{}'.format(item)].astype(np.float32), \
@@ -81,7 +70,7 @@ class NPZLoader(Dataset):
         :return: None
         """
 
-        print(self.__getitem__(0))
+        print(self.__getitem__(0)[0].shape)
 
 
 if __name__ == "__main__":
@@ -89,11 +78,15 @@ if __name__ == "__main__":
     npz_loader = NPZLoader('../Data/')
     npz_loader()
 
+    # split the dataset
+    train_set, test_set = random_split(npz_loader, [100, 1900])
+
     # testing with dataloader
-    data_loader = DataLoader(npz_loader, batch_size=5)
+    data_loader = DataLoader(train_set, batch_size=5)
 
     # check the returned structure
     for i, data in enumerate(data_loader):
+        print(i)
         a, b, c, d = data
         print(a.shape, b.shape, c.shape, d.shape)
         break

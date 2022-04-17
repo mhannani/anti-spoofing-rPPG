@@ -5,9 +5,10 @@ from tqdm import tqdm
 from torch.utils.data import DataLoader
 from utils.NPZ_loader import NPZLoader
 from models.Cnn_Rnn import CnnRnn
+from utils.split import get_sets
 
 
-def train(n_epochs: int = 10, data_path: str = './Data', net: str = 'cnn'):
+def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.003, net: str = 'cnn'):
     """
     Training process
 
@@ -15,6 +16,8 @@ def train(n_epochs: int = 10, data_path: str = './Data', net: str = 'cnn'):
         Number of epochs during training
     :param data_path: str
         The path to the data
+    :param train_test_split: float
+        The proportion of the trainset
     :param net: str
         The network to train, 'cnn' for CNN, 'rnn' for RNN, 'both' for both
     :return: None
@@ -23,11 +26,21 @@ def train(n_epochs: int = 10, data_path: str = './Data', net: str = 'cnn'):
     if net not in ['cnn', 'rnn', 'both']:
         raise NotImplemented('Net value is not implemented')
 
+    if net == 'cnn':
+        print('Training cnn...')
+    elif net == 'rnn':
+        print('Training rnn...')
+    else:
+        print('Training both...')
+
     # Get data
     dataset = NPZLoader(data_path)
 
-    # Get dataloader
-    train_data = DataLoader(dataset, batch_size=5)
+    # split dataset
+    train_set, _ = get_sets(dataset, train_test_split)
+
+    # Get train dataloader
+    train_data = DataLoader(train_set, batch_size=5)
 
     # model
     model = CnnRnn()
