@@ -1,15 +1,17 @@
 import torch.nn as nn
 import torch.optim
-
+import glob
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 from utils.NPZ_loader import NPZLoader
 from models.Cnn_Rnn import CnnRnn
 from utils.split import get_sets
 from utils.save import save_checkpoints
+from utils.load import check_saved_checkpoints, load_last_checkpoints
 
 
-def train(n_epochs: int = 1, data_path: str = './Data', train_test_split: float = 0.3, net: str = 'cnn'):
+def train(n_epochs: int = 1, data_path: str = './Data', train_test_split: float = 0.3,
+          net: str = 'cnn', resume_training: bool = True):
     """
     Training process
 
@@ -21,6 +23,9 @@ def train(n_epochs: int = 1, data_path: str = './Data', train_test_split: float 
         The proportion of the training set
     :param net: str
         The network to train, 'cnn' for CNN, 'rnn' for RNN, 'both' for both
+    :param resume_training: bool
+        True, resume training from previously saved checkpoint, False otherwise.
+
     :return: None
     """
 
@@ -41,8 +46,12 @@ def train(n_epochs: int = 1, data_path: str = './Data', train_test_split: float 
     # Get train dataloader
     train_data = DataLoader(train_set, batch_size=5)
 
-    # model
-    model = CnnRnn()
+    if resume_training and check_saved_checkpoints('./pretrained'):
+        print('Loading saved model and resume training...')
+        model = load_last_checkpoints('./pretrained/')
+    else:
+        print('No checkpoint to resume training from... Training from scratch.')
+        model = CnnRnn()
 
     # loss function
     criterion = nn.MSELoss()
