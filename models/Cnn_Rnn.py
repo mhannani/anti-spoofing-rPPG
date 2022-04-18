@@ -3,7 +3,7 @@ import torch.nn as nn
 import numpy as np
 import torchvision
 from models.CNN import CNN
-from models.LSTM import RNN
+from models.RNN import RNN
 
 
 class CnnRnn(nn.Module):

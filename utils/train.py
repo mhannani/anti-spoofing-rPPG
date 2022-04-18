@@ -9,7 +9,7 @@ from utils.split import get_sets
 from utils.save import save_checkpoints
 
 
-def train(n_epochs: int = 1, data_path: str = './Data', train_test_split: float = 0.003, net: str = 'rnn'):
+def train(n_epochs: int = 1, data_path: str = './Data', train_test_split: float = 0.3, net: str = 'cnn'):
     """
     Training process
 
@@ -24,15 +24,13 @@ def train(n_epochs: int = 1, data_path: str = './Data', train_test_split: float 
     :return: None
     """
 
-    if net not in ['cnn', 'rnn', 'both']:
+    if net not in ['cnn', 'rnn']:
         raise NotImplemented('Net value is not implemented')
 
     if net == 'cnn':
         print('Training cnn...')
-    elif net == 'rnn':
-        print('Training rnn...')
     else:
-        print('Training both...')
+        print('Training rnn...')
 
     # Get data
     dataset = NPZLoader(data_path)
@@ -80,7 +78,6 @@ def train(n_epochs: int = 1, data_path: str = './Data', train_test_split: float 
             else:
                 _, output_f = model(images, False, anchors)
                 # compute the loss
-                print(output_f.shape, label.shape)
                 loss = criterion(output_f, torch.zeros((5, 1, 2), dtype=torch.float32))
 
             # backward propagation
