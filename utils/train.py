@@ -9,7 +9,7 @@ from utils.save import save_checkpoints
 from utils.load import check_saved_checkpoints, load_last_checkpoints
 
 
-def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.2,
+def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.5,
           net: str = 'cnn', resume_training: bool = True):
     """
     Training process
