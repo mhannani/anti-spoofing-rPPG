@@ -1,6 +1,5 @@
 import torch.nn as nn
 import torch.optim
-import glob
 from tqdm import tqdm
 from torch.utils.data import DataLoader
 from utils.NPZ_loader import NPZLoader
@@ -10,7 +9,7 @@ from utils.save import save_checkpoints
 from utils.load import check_saved_checkpoints, load_last_checkpoints
 
 
-def train(n_epochs: int = 1, data_path: str = './Data', train_test_split: float = 0.3,
+def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.2,
           net: str = 'cnn', resume_training: bool = True):
     """
     Training process
@@ -68,8 +67,8 @@ def train(n_epochs: int = 1, data_path: str = './Data', train_test_split: float 
         running_loss = []
 
         # progress bar
-        p_bar = tqdm(total=len(train_data), bar_format='{l_bar}{bar:10}{r_bar}',
-                     unit=' batches', ncols=200, mininterval=0.05, colour='#00ff00')
+        p_bar = tqdm(total=len(train_data), bar_format='{l_bar}{bar:20}{r_bar}',
+                     unit=' batches', ncols=200, mininterval=0.02, colour='#00ff00')
 
         for i, data in enumerate(train_data):
             # unpacking

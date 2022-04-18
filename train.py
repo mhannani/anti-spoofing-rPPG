@@ -3,4 +3,7 @@ from utils.load import load_last_checkpoints
 
 
 if __name__ == "__main__":
-    train()
+    # TODO: Implement function to train the two models in the same loop/time
+
+    train(net='cnn')
+    train(net='rnn')

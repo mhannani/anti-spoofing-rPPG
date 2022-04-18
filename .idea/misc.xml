@@ -5,36 +5,36 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="476" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/save.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="216" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/NPZ_loader.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="97" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/models/CNN.py" />
+          <option name="caretOffset" value="0" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/README.md" />
         </OpenedFileInfo>
         <OpenedFileInfo>
           <option name="caretOffset" value="150" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/models/RNN.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="116" />
+          <option name="caretOffset" value="189" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/train.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="1443" />
+          <option name="caretOffset" value="229" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/load.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="33" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/config.yaml" />
+          <option name="caretOffset" value="1927" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/train.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="1517" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/train.py" />
+          <option name="caretOffset" value="0" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/train_beta.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="649" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/read.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="211" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/config.yaml" />
         </OpenedFileInfo>
       </list>
     </option>
