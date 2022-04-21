@@ -17,7 +17,7 @@ def read_config_yaml(config_path: str) -> Dict:
         return config_file
 
 
-def get_devices(config: Dict) -> torch.device:
+def get_device(config: Dict) -> torch.device:
     """
     Get the device based on configuration
     :param config: Dict
@@ -44,4 +44,4 @@ def get_devices(config: Dict) -> torch.device:
 
 if __name__ == "__main__":
     config_dict = read_config_yaml('config.yaml')
-    get_devices(config_dict)
+    get_device(config_dict)

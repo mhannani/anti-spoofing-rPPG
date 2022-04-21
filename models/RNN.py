@@ -29,6 +29,10 @@ class RNN(nn.Module):
         self.fc = nn.Linear(self.hidden_dim, 2)
 
     def forward(self, f):
+        """
+        Forward pass
+        """
+
         # F est de dimension [5,32,32,1]
         f = f.view(5, 1, -1)
         output, self.hidden = self.LSTM(f, self.hidden)

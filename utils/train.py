@@ -9,11 +9,12 @@ from utils.save import save_checkpoints
 from utils.load import check_saved_checkpoints, load_last_checkpoints
 
 
-def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.5,
-          net: str = 'cnn', resume_training: bool = True):
+def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.1, net: str = 'cnn', resume_training: bool = True):
     """
     Training process
 
+    :param device: torch.device
+        The device to train network on
     :param n_epochs: int
         Number of epochs during training
     :param data_path: str
@@ -27,6 +28,9 @@ def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float
 
     :return: None
     """
+
+    print('Empty the cache...')
+    torch.cuda.empty_cache()
 
     if net not in ['cnn', 'rnn']:
         raise NotImplemented('Net value is not implemented')
@@ -43,7 +47,7 @@ def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float
     train_set, _ = get_sets(dataset, train_test_split)
 
     # Get train dataloader
-    train_data = DataLoader(train_set, batch_size=5)
+    train_data = DataLoader(train_set, batch_size=32)
 
     if resume_training and check_saved_checkpoints('./pretrained'):
         print('Loading saved model and resume training...')
@@ -55,7 +59,7 @@ def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float
     # loss function
     criterion = nn.MSELoss()
 
-    # optimizer
+    # define the optimizer
     optimizer = torch.optim.Adam(model.parameters(), lr=3e-3, betas=(0.9, 0.999), eps=1e-08)
 
     # for training statistics
@@ -69,10 +73,9 @@ def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float
         # progress bar
         p_bar = tqdm(total=len(train_data), bar_format='{l_bar}{bar:20}{r_bar}',
                      unit=' batches', ncols=200, mininterval=0.02, colour='#00ff00')
-
-        for i, data in enumerate(train_data):
+        for i, (images, labels_d, anchors, label) in enumerate(train_data):
             # unpacking
-            images, labels_d, anchors, label = data
+            images, labels_d, anchors, label = images, labels_d, anchors, label
 
             # initialize gradients
             optimizer.zero_grad()
@@ -84,7 +87,7 @@ def train(n_epochs: int = 10, data_path: str = './Data', train_test_split: float
                 # compute the loss
                 loss = criterion(torch.transpose(output_d, 1, 3), labels_d)
             else:
-                _, output_f = model(images, False, anchors)
+                _, output_f = model(images, False, anchors).to(device)
                 # compute the loss
                 loss = criterion(output_f, torch.zeros((5, 1, 2), dtype=torch.float32))
 

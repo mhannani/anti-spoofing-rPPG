@@ -52,6 +52,7 @@ class CNN(nn.Module):
 
     def forward(self, x):
         x = self.cnn0(x)
+
         x = self.bn0(x)
         x = self.non_linearity0(x)
 
@@ -69,6 +70,7 @@ class CNN(nn.Module):
 
         X1 = self.resize_64(x)
 
+        print('X1: ', X1.shape)
         # Block2
         x = self.cnn1(x)
         x = self.bn1(x)
@@ -82,6 +84,7 @@ class CNN(nn.Module):
         x = self.pool(x)
 
         X2 = x
+        print('X2: ', X2.shape)
 
         # Block3:
         x = self.cnn1(x)
@@ -95,20 +98,22 @@ class CNN(nn.Module):
         x = self.non_linearity3(x)
         x = self.pool(x)
 
-        X3 = self.resize_64(x)
+        # X3 = self.resize_64(x)
+        # print('X3: ', X3.shape)
+        # #
+        # X = torch.cat((X1, X2, X3), 1)
+        #
+        # # Feature map:
+        # T = self.cnn4(X)
+        # T = self.cnn5(T)
+        # T = self.cnn6(T)
+        # T = self.resize_32(T)
+        #
+        # # Depth map:
+        # D = self.cnn7(X)
+        # D = self.cnn8(D)
+        # D = self.cnn9(D)
+        # D = self.resize_32(D)
 
-        X = torch.cat((X1, X2, X3), 1)
-
-        # Feature map:
-        T = self.cnn4(X)
-        T = self.cnn5(T)
-        T = self.cnn6(T)
-        T = self.resize_32(T)
-
-        # Depth map:
-        D = self.cnn7(X)
-        D = self.cnn8(D)
-        D = self.cnn9(D)
-        D = self.resize_32(D)
-
+        D, T = torch.ones((5, 1, 32, 32), requires_grad=True), torch.ones((5, 1, 32, 32), requires_grad=True)
         return D, T

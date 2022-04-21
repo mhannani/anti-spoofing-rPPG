@@ -2,7 +2,7 @@
 # =============
 
 # device to train the model on
-device: '0'
+device: ' ' #device: ' ' for cpu, device: '0' for gpu
 
 # dataset configuration
 dataset:
