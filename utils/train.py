@@ -55,6 +55,7 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
     else:
         print('No checkpoint to resume training from... Training from scratch.')
         model = CnnRnn()
+        model = model.to(device)
 
     # loss function
     criterion = nn.MSELoss()
