@@ -77,6 +77,8 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
             # unpacking
             images, labels_d, anchors, label = images, labels_d, anchors, label
 
+            images, labels_d, anchors, label = images.to(device), labels_d.to(device), anchors.to(device), label.to(device)
+
             # initialize gradients
             optimizer.zero_grad()
 
