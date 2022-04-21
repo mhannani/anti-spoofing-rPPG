@@ -20,8 +20,8 @@ class RNN(nn.Module):
         self.num_layers = 1
         self.batch_size = 1
 
-        self.hidden = (torch.zeros(self.num_layers, self.batch_size, self.hidden_dim),
-                       torch.zeros(self.num_layers, self.batch_size, self.hidden_dim))
+        self.hidden = (torch.zeros(self.num_layers, self.batch_size, self.hidden_dim).to('cuda:0'),
+                       torch.zeros(self.num_layers, self.batch_size, self.hidden_dim).to('cuda:0'))
         # LSTM cell
         self.LSTM = nn.LSTM(input_size=self.input_dim, hidden_size=self.hidden_dim, num_layers=self.num_layers)
 

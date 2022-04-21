@@ -9,7 +9,7 @@ from utils.save import save_checkpoints
 from utils.load import check_saved_checkpoints, load_last_checkpoints
 
 
-def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.1, net: str = 'cnn', resume_training: bool = True):
+def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.8, net: str = 'cnn', resume_training: bool = True):
     """
     Training process
 
@@ -29,8 +29,13 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
     :return: None
     """
 
-    print('Empty the cache...')
-    torch.cuda.empty_cache()
+    if device == 'cpu':
+        print('training on cpu...')
+    else:
+        print('Empty the cache...')
+        torch.cuda.empty_cache()
+        print('Training on gpu...')
+
 
     if net not in ['cnn', 'rnn']:
         raise NotImplemented('Net value is not implemented')
@@ -51,7 +56,7 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
 
     if resume_training and check_saved_checkpoints('./pretrained'):
         print('Loading saved model and resume training...')
-        model = load_last_checkpoints('./pretrained/')
+        model = load_last_checkpoints('./pretrained/').to(device)
     else:
         print('No checkpoint to resume training from... Training from scratch.')
         model = CnnRnn()
@@ -76,8 +81,6 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
                      unit=' batches', ncols=200, mininterval=0.02, colour='#00ff00')
         for i, (images, labels_d, anchors, label) in enumerate(train_data):
             # unpacking
-            images, labels_d, anchors, label = images, labels_d, anchors, label
-
             images, labels_d, anchors, label = images.to(device), labels_d.to(device), anchors.to(device), label.to(device)
 
             # initialize gradients
@@ -87,10 +90,11 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
             if net == 'cnn':
                 output_d, _ = model(images, False, anchors)
 
+
                 # compute the loss
                 loss = criterion(torch.transpose(output_d, 1, 3), labels_d)
             else:
-                _, output_f = model(images, False, anchors).to(device)
+                _, output_f = model(images, False, anchors)
                 # compute the loss
                 loss = criterion(output_f, torch.zeros((5, 1, 2), dtype=torch.float32))
 

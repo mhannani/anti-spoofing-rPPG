@@ -111,6 +111,6 @@ class CNN(nn.Module):
         D = self.cnn9(D)
         D = self.resize_32(D)
 
-        T = torch.ones((5, 1, 32, 32), requires_grad=True)
+        T = torch.ones((5, 1, 32, 32), requires_grad=True).to('cuda:0')
 
         return D, T
