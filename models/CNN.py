@@ -70,7 +70,6 @@ class CNN(nn.Module):
 
         X1 = self.resize_64(x)
 
-        print('X1: ', X1.shape)
         # Block2
         x = self.cnn1(x)
         x = self.bn1(x)
@@ -84,7 +83,6 @@ class CNN(nn.Module):
         x = self.pool(x)
 
         X2 = x
-        print('X2: ', X2.shape)
 
         # Block3:
         x = self.cnn1(x)
@@ -99,7 +97,6 @@ class CNN(nn.Module):
         x = self.pool(x)
 
         # X3 = self.resize_64(x)
-        # print('X3: ', X3.shape)
         # #
         # X = torch.cat((X1, X2, X3), 1)
         #
