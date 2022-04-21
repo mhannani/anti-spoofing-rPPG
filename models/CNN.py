@@ -96,21 +96,21 @@ class CNN(nn.Module):
         x = self.non_linearity3(x)
         x = self.pool(x)
 
-        # X3 = self.resize_64(x)
-        # #
-        # X = torch.cat((X1, X2, X3), 1)
-        #
-        # # Feature map:
-        # T = self.cnn4(X)
-        # T = self.cnn5(T)
-        # T = self.cnn6(T)
-        # T = self.resize_32(T)
-        #
-        # # Depth map:
-        # D = self.cnn7(X)
-        # D = self.cnn8(D)
-        # D = self.cnn9(D)
-        # D = self.resize_32(D)
+        X3 = self.resize_64(x)
+        X = torch.cat((X1, X2, X3), 1)
 
-        D, T = torch.ones((5, 1, 32, 32), requires_grad=True), torch.ones((5, 1, 32, 32), requires_grad=True)
+        # Feature map:
+        T = self.cnn4(X)
+        T = self.cnn5(T)
+        T = self.cnn6(T)
+        T = self.resize_32(T)
+
+        # Depth map:
+        D = self.cnn7(X)
+        D = self.cnn8(D)
+        D = self.cnn9(D)
+        D = self.resize_32(D)
+
+        T = torch.ones((5, 1, 32, 32), requires_grad=True)
+
         return D, T
