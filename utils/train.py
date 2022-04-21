@@ -47,7 +47,7 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
     train_set, _ = get_sets(dataset, train_test_split)
 
     # Get train dataloader
-    train_data = DataLoader(train_set, batch_size=32)
+    train_data = DataLoader(train_set, batch_size=5)
 
     if resume_training and check_saved_checkpoints('./pretrained'):
         print('Loading saved model and resume training...')
