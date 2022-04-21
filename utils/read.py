@@ -38,7 +38,6 @@ def get_device(config: Dict) -> torch.device:
     else:
         raise NotImplementedError
 
-    print(type(device))
     return device
 
 

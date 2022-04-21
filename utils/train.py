@@ -9,7 +9,7 @@ from utils.save import save_checkpoints
 from utils.load import check_saved_checkpoints, load_last_checkpoints
 
 
-def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.8, net: str = 'cnn', resume_training: bool = True):
+def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.8, net: str='cnn', resume_training: bool = True):
     """
     Training process
 
@@ -30,20 +30,20 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
     """
 
     if device == 'cpu':
-        print('training on cpu...')
+        print(f'Training {net} on cpu...')
     else:
-        print('Empty the cache...')
         torch.cuda.empty_cache()
-        print('Training on gpu...')
-
+        print(f'Training {net} on gpu...')
 
     if net not in ['cnn', 'rnn']:
         raise NotImplemented('Net value is not implemented')
 
-    if net == 'cnn':
-        print('Training cnn...')
-    else:
-        print('Training rnn...')
+    # if net == 'cnn':
+    #     pass
+    #     print('Training cnn...')
+    # else:
+    #     pass
+    #     print('Training rnn...')
 
     # Get data
     dataset = NPZLoader(data_path)
@@ -89,7 +89,6 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
             # forward pass
             if net == 'cnn':
                 output_d, _ = model(images, False, anchors)
-
 
                 # compute the loss
                 loss = criterion(torch.transpose(output_d, 1, 3), labels_d)
