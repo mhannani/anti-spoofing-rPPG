@@ -5,44 +5,44 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="0" />
+          <option name="caretOffset" value="356" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/train.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="381" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/load.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="0" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/README.md" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="732" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/read.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="205" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/models/Cnn_Rnn.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="192" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/inference.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="177" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/testing.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="118" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/config.yaml" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="736" />
+          <option name="caretOffset" value="3106" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/train.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="330" />
+          <option name="caretOffset" value="395" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/models/RNN.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="554" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/testing.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="74" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/config.yaml" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="873" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/read.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="320" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/NPZ_loader.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="3761" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/models/CNN.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="0" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/save.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="1427" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/models/Cnn_Rnn.py" />
         </OpenedFileInfo>
       </list>
     </option>

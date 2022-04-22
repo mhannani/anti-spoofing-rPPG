@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch.optim
-from tqdm import tqdm
+# from tqdm import tqdm
 from torch.utils.data import DataLoader
 from utils.NPZ_loader import NPZLoader
 from models.Cnn_Rnn import CnnRnn
@@ -8,8 +8,10 @@ from utils.split import get_sets
 from utils.save import save_checkpoints
 from utils.load import check_saved_checkpoints, load_last_checkpoints
 
+torch.autograd.set_detect_anomaly(True)
 
-def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', train_test_split: float = 0.8, net: str='cnn', resume_training: bool = True):
+
+def train(device: torch.device, n_epochs: int = 1000, data_path: str = './Data', train_test_split: float = 0.06, net: str='cnn', resume_training: bool = True):
     """
     Training process
 
@@ -38,13 +40,6 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
     if net not in ['cnn', 'rnn']:
         raise NotImplemented('Net value is not implemented')
 
-    # if net == 'cnn':
-    #     pass
-    #     print('Training cnn...')
-    # else:
-    #     pass
-    #     print('Training rnn...')
-
     # Get data
     dataset = NPZLoader(data_path)
 
@@ -59,7 +54,7 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
         model = load_last_checkpoints('./pretrained/').to(device)
     else:
         print('No checkpoint to resume training from... Training from scratch.')
-        model = CnnRnn()
+        model = CnnRnn(device)
         model = model.to(device)
 
     # loss function
@@ -73,12 +68,14 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
 
     # Training loop
     for epoch in range(n_epochs):
+        # print(torch.cuda.memory_summary(device=device, abbreviated=False))
+
         # training loss tracker
         running_loss = []
 
         # progress bar
-        p_bar = tqdm(total=len(train_data), bar_format='{l_bar}{bar:20}{r_bar}',
-                     unit=' batches', ncols=200, mininterval=0.02, colour='#00ff00')
+        # p_bar = tqdm(total=len(train_data), bar_format='{l_bar}{bar:20}{r_bar}',
+        #              unit=' batches', ncols=200, mininterval=0.02, colour='#00ff00')
         for i, (images, labels_d, anchors, label) in enumerate(train_data):
             # unpacking
             images, labels_d, anchors, label = images.to(device), labels_d.to(device), anchors.to(device), label.to(device)
@@ -95,17 +92,19 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
             else:
                 _, output_f = model(images, False, anchors)
                 # compute the loss
-                loss = criterion(output_f, torch.zeros((5, 1, 2), dtype=torch.float32))
+                loss = criterion(output_f, torch.zeros((5, 1, 2, 2), dtype=torch.float32).to(device))
 
             # backward propagation
-            loss.backward()
+            loss.backward(retain_graph=True)
+
+            # DONE: ADD CLIP GRADIENT FOR STABLE NETWORK
+            # DONE: from torch.nn.utils import clip_grad_norm_
+            # DONE: clip_grad_norm_(model.parameters(), 1)
+            # nn.utils.clip_grad_norm_(model.parameters(), max_norm=10)
 
             # Performs single optimization step
-            optimizer.step()
-
-            # TODO: ADD CLIP GRADIENT FOR STABLE NETWORK
-            # TODO: from torch.nn.utils import clip_grad_norm_
-            # TODO: clip_grad_norm_(model.parameters(), 1)
+            if net == "cnn":
+                optimizer.step()
 
             # compute statistics
             total += labels_d.size(0)
@@ -114,15 +113,15 @@ def train(device: torch.device, n_epochs: int = 10, data_path: str = './Data', t
             running_loss.append(loss.item())
 
             # update the progress bar
-            p_bar.set_postfix(
-                epoch=f"{epoch}/{n_epochs}, train loss= {round(sum(running_loss) / len(running_loss), 2)}",
-                refresh=True)
+            # p_bar.set_postfix(
+            #     epoch=f"{epoch}/{n_epochs}, train loss= {round(sum(running_loss) / len(running_loss), 2)}",
+            #     refresh=True)
 
             # update the progress bar
-            p_bar.update()
-
+            # p_bar.update()
+            print(f'Epoch: {epoch}/{n_epochs}, iteration: {i + epoch * len(train_data)}/{len(train_data)}, loss: {loss.item()}')
         # close progress bar
-        p_bar.close()
+        # p_bar.close()
 
         # saving model/models
         save_checkpoints(model, epoch)

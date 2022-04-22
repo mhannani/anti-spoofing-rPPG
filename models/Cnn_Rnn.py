@@ -8,12 +8,13 @@ from models.RNN import RNN
 
 class CnnRnn(nn.Module):
 
-    def __init__(self):
+    def __init__(self, device):
         super().__init__()
 
         self.threshold = 0.1
-        self.CNN = CNN()
-        self.RNN = RNN()
+        self.CNN = CNN(device)
+        self.RNN = RNN(device)
+        self.device = device
 
     def forward(self, x, turned, anchors):
 
@@ -22,7 +23,8 @@ class CnnRnn(nn.Module):
         depth_map, feature_map = depth_map, feature_map
 
         # Non_rigid_registration_layer
-        non_rigid_registration = torch.where(depth_map >= self.threshold, torch.ones(5, 1, 32, 32).to('cuda:0'), torch.zeros(5, 1, 32, 32).to('cuda:0'))
+        non_rigid_registration = torch.where(depth_map >= self.threshold, torch.ones(5, 1, 32, 32).to('cuda:1'),
+                                             torch.zeros(5, 1, 32, 32).to('cuda:1'))
 
         u = feature_map * non_rigid_registration
 

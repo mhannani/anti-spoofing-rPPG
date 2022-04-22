@@ -7,21 +7,21 @@ import torch.fft
 
 class RNN(nn.Module):
 
-    def __init__(self):
+    def __init__(self, device):
         """
         RNN's class constructor
         """
         # superclass' constructor
         super().__init__()
 
-        # parameters
+        # parameters.
         self.hidden_dim = 100
         self.input_dim = 32 * 32
         self.num_layers = 1
         self.batch_size = 1
 
-        self.hidden = (torch.zeros(self.num_layers, self.batch_size, self.hidden_dim).to('cuda:0'),
-                       torch.zeros(self.num_layers, self.batch_size, self.hidden_dim).to('cuda:0'))
+        self.hidden = (torch.zeros(self.num_layers, self.batch_size, self.hidden_dim).to(device),
+                       torch.zeros(self.num_layers, self.batch_size, self.hidden_dim).to(device))
         # LSTM cell
         self.LSTM = nn.LSTM(input_size=self.input_dim, hidden_size=self.hidden_dim, num_layers=self.num_layers)
 

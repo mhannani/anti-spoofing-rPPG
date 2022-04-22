@@ -157,17 +157,17 @@ if __name__ == "__main__":
     # creation des donnees:
 
     # Images
-    Images = np.load('D:\data_processing/images.npz')
+    Images = np.load('./Data/images.npz')
     print(type(Images))
 
     # Changement de base
-    Anchors = np.load('D:\data_processing/anchors.npz')
+    Anchors = np.load('./Data/anchors.npz')
 
     # label_D:
-    Labels_D = np.load('D:\data_processing/labels_D.npz')
+    Labels_D = np.load('./Data/labels_D.npz')
 
     # label_spoofing:
-    Labels = np.load('D:\data_processing/label.npz')
+    Labels = np.load('./Data/label.npz')
 
     # set:
     n = len(Images)

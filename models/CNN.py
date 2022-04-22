@@ -6,9 +6,8 @@ import torchvision
 
 class CNN(nn.Module):
 
-    def __init__(self):
+    def __init__(self, device):
         super().__init__()
-
         self.resize_32 = nn.Upsample(size=32, mode='nearest')
         self.resize_64 = nn.Upsample(size=64, mode='nearest')
 
@@ -49,6 +48,8 @@ class CNN(nn.Module):
         self.cnn7 = nn.Conv2d(in_channels=384, out_channels=128, kernel_size=3, stride=1, padding=1)
         self.cnn8 = nn.Conv2d(in_channels=128, out_channels=64, kernel_size=3, stride=1, padding=1)
         self.cnn9 = nn.Conv2d(in_channels=64, out_channels=1, kernel_size=3, stride=1, padding=1)
+
+        self.device = device
 
     def forward(self, x):
         x = self.cnn0(x)
@@ -105,12 +106,11 @@ class CNN(nn.Module):
         T = self.cnn6(T)
         T = self.resize_32(T)
 
-        # Depth map:
+        # Depth map:e####
         D = self.cnn7(X)
         D = self.cnn8(D)
         D = self.cnn9(D)
         D = self.resize_32(D)
-
-        T = torch.ones((5, 1, 32, 32), requires_grad=True).to('cuda:0')
+        T = torch.rand((5, 1, 32, 32), requires_grad=True).to('cuda:1')
 
         return D, T

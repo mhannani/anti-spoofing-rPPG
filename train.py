@@ -9,5 +9,5 @@ if __name__ == "__main__":
     cfg = read_config_yaml('./config.yaml')
     device = get_device(cfg)
 
-    train(device=device, net='cnn')
+    train(device=device, net='rnn')
     # train(net='rnn')
