@@ -125,3 +125,7 @@ def train(device: torch.device, n_epochs: int = 1000, data_path: str = './Data',
 
         # saving model/models
         save_checkpoints(model, epoch)
+
+
+def train_all():
+    pass

@@ -34,7 +34,7 @@ def get_device(config: Dict) -> torch.device:
     elif config_device == "0":
         device = torch.device('cuda:0')
     elif config_device == "1":
-        device = torch.device("cuda: 1")
+        device = torch.device("cuda:1")
     else:
         raise NotImplementedError
 
