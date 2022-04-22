@@ -35,6 +35,7 @@ class RNN(nn.Module):
 
         # F est de dimension [5,32,32,1]
         f = f.view(5, 1, -1)
+
         output, self.hidden = self.LSTM(f, self.hidden)
         R = self.fc(output)
         R = torch.fft.fft(R, norm='backward', dim=1)

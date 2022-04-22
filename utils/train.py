@@ -119,7 +119,7 @@ def train(device: torch.device, n_epochs: int = 1000, data_path: str = './Data',
 
             # update the progress bar
             # p_bar.update()
-            print(f'Epoch: {epoch}/{n_epochs}, iteration: {i + epoch * len(train_data)}/{len(train_data)}, loss: {loss.item()}')
+            print(f'Epoch: {epoch}/{n_epochs}, iteration: {i}/{len(train_data)}, loss: {loss.item()}')
         # close progress bar
         # p_bar.close()
 
