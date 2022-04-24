@@ -29,6 +29,6 @@ def get_sets(dataset: NPZLoader, train_test_split: float) -> Tuple[Dataset, Data
 
 if __name__ == "__main__":
     # dataset
-    dataset = NPZLoader('./Data')
+    dataset_npz = NPZLoader('./Data')
 
-    train, test = get_sets(dataset, 0.2)
+    train, test = get_sets(dataset_npz, 0.2)

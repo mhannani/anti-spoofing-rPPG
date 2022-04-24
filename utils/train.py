@@ -7,11 +7,12 @@ from models.Cnn_Rnn import CnnRnn
 from utils.split import get_sets
 from utils.save import save_checkpoints
 from utils.load import check_saved_checkpoints, load_last_checkpoints
-
+from utils.show import train_on
 torch.autograd.set_detect_anomaly(True)
 
 
-def train(device: torch.device, n_epochs: int = 1000, data_path: str = './Data', train_test_split: float = 0.06, net: str='cnn', resume_training: bool = True):
+def train(device: torch.device, n_epochs: int = 1000, data_path: str = './Data',
+          train_test_split: float = 0.06, net: str = 'cnn', resume_training: bool = True):
     """
     Training process
 
@@ -31,14 +32,7 @@ def train(device: torch.device, n_epochs: int = 1000, data_path: str = './Data',
     :return: None
     """
 
-    if device == 'cpu':
-        print(f'Training {net} on cpu...')
-    else:
-        torch.cuda.empty_cache()
-        print(f'Training {net} on gpu...')
-
-    if net not in ['cnn', 'rnn']:
-        raise NotImplemented('Net value is not implemented')
+    train_on(net, device)
 
     # Get data
     dataset = NPZLoader(data_path)
