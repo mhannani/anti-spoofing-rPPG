@@ -14,6 +14,6 @@ echo "activating environment..."
 conda activate anti_spoofing_rPPG
 
 echo "Installing dependencies..."
-conda install --file requirements.txt
+conda env update --file environment.yml
 
 echo "Done !"
