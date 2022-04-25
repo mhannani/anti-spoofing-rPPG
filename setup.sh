@@ -8,10 +8,10 @@ echo "getting into anti-spoofing-rPPG"
 cd anti-spoofing-rPPG
 
 echo "Creating conda environment..."
-conda create --name anti-spoofing-rPPG
+conda create --name anti-spoofing-rPPG_1
 
 echo "activating environment..."
-conda activate anti-spoofing-rPPG
+conda activate anti-spoofing-rPPG_1
 
 echo "Installing dependencies..."
 conda install --file requirements.txt
