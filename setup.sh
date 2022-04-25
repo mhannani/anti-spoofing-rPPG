@@ -16,4 +16,4 @@ conda activate anti_spoofing_rPPG
 echo "Installing dependencies..."
 conda env update --file environment.yml
 
-echo "Done !"
+echo "Done setting up environment !"
