@@ -173,6 +173,7 @@ def train_all(device: torch.device, n_epochs: int = 1000, data_path: str = './Da
 
                 # TODO: Something Else
 
+
                 # accumulate loss values
                 cnn_running_loss.append(cnn_loss.item())
                 rnn_running_loss.append(rnn_loss.item())

@@ -5,16 +5,16 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="515" />
+          <option name="caretOffset" value="1446" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/load.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="155" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/train.py" />
+          <option name="caretOffset" value="888" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/models/RNN.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="35" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/models/RNN.py" />
+          <option name="caretOffset" value="5672" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/train.py" />
         </OpenedFileInfo>
       </list>
     </option>
