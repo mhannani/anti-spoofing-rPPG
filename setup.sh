@@ -8,7 +8,7 @@ echo "getting into anti_spoofing_rPPG"
 cd anti-spoofing-rPPG
 
 echo "Creating conda environment..."
-conda create --name anti_spoofing_rPPG --file environment.yml
+conda create --file environment.yml
 
 echo "activating environment..."
 conda activate anti_spoofing_rPPG

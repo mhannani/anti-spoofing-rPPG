@@ -33,12 +33,12 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/config.yaml" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="228" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/setup.sh" />
+          <option name="caretOffset" value="1274" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/environment.yml" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="662" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/environment.yml" />
+          <option name="caretOffset" value="228" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/setup.sh" />
         </OpenedFileInfo>
       </list>
     </option>
