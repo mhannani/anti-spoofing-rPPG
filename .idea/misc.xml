@@ -5,44 +5,16 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="417" />
+          <option name="caretOffset" value="515" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/load.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="3393" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/train_beta.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="6202" />
+          <option name="caretOffset" value="155" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/train.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="959" />
+          <option name="caretOffset" value="35" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/models/RNN.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="917" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/models/Cnn_Rnn.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="603" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/sample.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="169" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/config.yaml" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="341" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/setup.sh" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="246" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/environment.yml" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="0" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/README.md" />
         </OpenedFileInfo>
       </list>
     </option>
