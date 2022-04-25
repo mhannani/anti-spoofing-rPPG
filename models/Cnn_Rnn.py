@@ -34,6 +34,7 @@ class CnnRnn(nn.Module):
             f = u
 
         rppg = self.RNN(f)
+
         return depth_map, rppg
 
 
