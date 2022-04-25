@@ -8,6 +8,8 @@ from utils.split import get_sets
 from utils.save import save_checkpoints
 from utils.load import check_saved_checkpoints, load_last_checkpoints
 from utils.show import train_on
+from utils.create import create_network
+
 torch.autograd.set_detect_anomaly(True)
 
 
@@ -43,13 +45,7 @@ def train(device: torch.device, n_epochs: int = 1000, data_path: str = './Data',
     # Get train dataloader
     train_data = DataLoader(train_set, batch_size=5)
 
-    if resume_training and check_saved_checkpoints('./pretrained'):
-        print('Loading saved model and resume training...')
-        model = load_last_checkpoints('./pretrained/').to(device)
-    else:
-        print('No checkpoint to resume training from... Training from scratch.')
-        model = CnnRnn(device)
-        model = model.to(device)
+    model = create_network(resume_training, device)
 
     # loss function
     criterion = nn.MSELoss()
@@ -57,7 +53,7 @@ def train(device: torch.device, n_epochs: int = 1000, data_path: str = './Data',
     # define the optimizer
     optimizer = torch.optim.Adam(model.parameters(), lr=3e-3, betas=(0.9, 0.999), eps=1e-08)
 
-    # for training statistics
+    # For training statistics
     total = 0
 
     # Training loop
@@ -70,9 +66,11 @@ def train(device: torch.device, n_epochs: int = 1000, data_path: str = './Data',
         # progress bar
         # p_bar = tqdm(total=len(train_data), bar_format='{l_bar}{bar:20}{r_bar}',
         #              unit=' batches', ncols=200, mininterval=0.02, colour='#00ff00')
+
         for i, (images, labels_d, anchors, label) in enumerate(train_data):
             # unpacking
-            images, labels_d, anchors, label = images.to(device), labels_d.to(device), anchors.to(device), label.to(device)
+            images, labels_d, anchors, label = images.to(device), labels_d.to(device), anchors.to(device), label.to(
+                device)
 
             # initialize gradients
             optimizer.zero_grad()
@@ -96,7 +94,7 @@ def train(device: torch.device, n_epochs: int = 1000, data_path: str = './Data',
             # DONE: clip_grad_norm_(model.parameters(), 1)
             # nn.utils.clip_grad_norm_(model.parameters(), max_norm=10)
 
-            # Performs single optimization step
+
             if net == "cnn":
                 optimizer.step()
 
@@ -121,5 +119,58 @@ def train(device: torch.device, n_epochs: int = 1000, data_path: str = './Data',
         save_checkpoints(model, epoch)
 
 
-def train_all():
-    pass
+def train_all(device: torch.device, n_epochs: int = 1000, data_path: str = './Data',
+              train_test_split: float = 0.06, resume_training: bool = True):
+    """
+    Train the CNN_RNN network.
+    """
+
+    # Get data
+    dataset = NPZLoader(data_path)
+
+    # split dataset
+    train_set, _ = get_sets(dataset, train_test_split)
+
+    # Get train dataloader
+    train_data = DataLoader(train_set, batch_size=5)
+
+    model = create_network(resume_training, device)
+
+    # loss function
+    criterion = nn.MSELoss()
+
+    # define the optimizer
+    optimizer = torch.optim.Adam(model.parameters(), lr=3e-3, betas=(0.9, 0.999), eps=1e-08)
+
+    # Training loop
+    for epoch in range(n_epochs):
+        for i, (images, labels_d, anchors, label) in enumerate(train_data):
+                images, labels_d, anchors, label = images.to(device), labels_d.to(device), anchors.to(device), label.to(
+                    device)
+
+                # For training statistics
+                cnn_running_loss = []
+                rnn_running_loss = []
+
+                # initialize gradients
+                optimizer.zero_grad()
+                output_d, output_f = model(images, False, anchors)
+
+                # compute the cnn loss
+                cnn_loss = criterion(torch.transpose(output_d, 1, 3), labels_d)
+
+                # compute the rnn loss
+                rnn_loss = criterion(output_f, torch.zeros((5, 1, 2, 2), dtype=torch.float32).to(device))
+
+                # backward propagations
+                cnn_loss.backward(retain_graph=True)
+                rnn_loss.backward(retain_graph=True)
+
+                # Performs single optimization step
+                # optimizer.step()
+
+                # accumulate loss values
+                cnn_running_loss.append(cnn_loss.item())
+                rnn_running_loss.append(rnn_loss.item())
+
+                print(f'Epoch: {epoch}/{n_epochs}, iteration: {i}/{len(train_data)}, cnn_loss: {cnn_loss.item()}, rnn_loss: {rnn_loss.item()}')
