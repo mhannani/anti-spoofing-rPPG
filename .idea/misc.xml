@@ -5,10 +5,6 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="634" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/create.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
           <option name="caretOffset" value="417" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/load.py" />
         </OpenedFileInfo>
@@ -33,12 +29,16 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/sample.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="243" />
+          <option name="caretOffset" value="169" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/config.yaml" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="0" />
+          <option name="caretOffset" value="228" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/setup.sh" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="662" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/environment.yml" />
         </OpenedFileInfo>
       </list>
     </option>
