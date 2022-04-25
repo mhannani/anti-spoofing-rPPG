@@ -5,7 +5,7 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="1446" />
+          <option name="caretOffset" value="411" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/load.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
@@ -13,12 +13,16 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/models/RNN.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="5645" />
+          <option name="caretOffset" value="318" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/train.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="0" />
+          <option name="caretOffset" value="466" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/setup.sh" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="203" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/plot.py" />
         </OpenedFileInfo>
       </list>
     </option>
