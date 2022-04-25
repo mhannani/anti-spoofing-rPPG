@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Setting up..."
 
 echo "Cloning project into anti-spoofing-rPPG"
