@@ -1,4 +1,4 @@
-name: anti-spoofing-rPPG-2
+name: anti-spoofing-rPPG
 channels:
   - defaults
 dependencies:
@@ -47,4 +47,4 @@ dependencies:
     - tqdm==4.64.0
     - typing-extensions==4.1.1
     - urllib3==1.26.9
-prefix: /home/esxi2vm5user1/anaconda3/envs/anti-spoofing-rPPG-2
+prefix: /home/esxi2vm5user1/anaconda3/envs/anti-spoofing-rPPG
