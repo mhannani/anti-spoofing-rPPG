@@ -14,6 +14,7 @@ if __name__ == "__main__":
     train_data = DataLoader(test_set, batch_size=5)
 
     a, b, c, d = next(iter(train_data))
-    print(a.shape, )
+    a = a.to('cuda:0')
+
     # inference
-    inference(12, 12)
+    print(inference(a, 12))

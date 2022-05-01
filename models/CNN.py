@@ -106,7 +106,7 @@ class CNN(nn.Module):
         T = self.cnn6(T)
         T = self.resize_32(T)
 
-        # Depth map:e####
+        # Depth map
         D = self.cnn7(X)
         D = self.cnn8(D)
         D = self.cnn9(D)
