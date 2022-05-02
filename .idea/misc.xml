@@ -5,7 +5,7 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="766" />
+          <option name="caretOffset" value="779" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/models/Cnn_Rnn.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
@@ -13,16 +13,8 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/models/Anti_Spoof_net.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="947" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/models/Anti_spoof_net_RNN.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
           <option name="caretOffset" value="1981" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/models/CNN.py" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="288" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/config.yaml" />
         </OpenedFileInfo>
         <OpenedFileInfo>
           <option name="caretOffset" value="3266" />
@@ -37,8 +29,20 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/inference.py" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="366" />
+          <option name="caretOffset" value="256" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/utils/inference.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="5155" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/utils/train.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="0" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/models/RNN.py" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="74" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/config.yaml" />
         </OpenedFileInfo>
       </list>
     </option>

@@ -22,8 +22,8 @@ class CnnRnn(nn.Module):
         depth_map, feature_map = self.CNN(x)
 
         # Non_rigid_registration_layer
-        non_rigid_registration = torch.where(depth_map >= self.threshold, torch.ones(5, 1, 32, 32),
-                                             torch.zeros(5, 1, 32, 32))
+        non_rigid_registration = torch.where(depth_map >= self.threshold, torch.ones(5, 1, 32, 32).to('cuda:0'),
+                                             torch.zeros(5, 1, 32, 32).to('cuda:0')).to('cuda:0')
 
         u = feature_map * non_rigid_registration
 
