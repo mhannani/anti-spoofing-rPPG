@@ -1,21 +1,21 @@
-# configuration
+# Configuration
 # =============
 
-# device to train the model on
-device: '0' # device: ' ' for cpu, device: '0' for gpu
+# Device to train the model on
+device: ' ' # device: ' ' for cpu, device: '0' for gpu
 
-# dataset configuration
+# Dataset configuration
 dataset:
   name: 'custom'
   root: 'Data/'
   train_test_split: 0.8
 
-# training process configuration
+# Training process configuration
 train:
   batch_size: 5 # shouldn't be changed !
   pretrained: True
   pretrained_folder: 'pretrained'
 
-# inference process configuration
+# Inference process configuration
 test:
   batch_size: 5

@@ -111,6 +111,6 @@ class CNN(nn.Module):
         D = self.cnn8(D)
         D = self.cnn9(D)
         D = self.resize_32(D)
-        T = torch.rand((5, 1, 32, 32), requires_grad=True).to('cuda:0')
+        T = torch.rand((5, 1, 32, 32), requires_grad=True)
 
         return D, T

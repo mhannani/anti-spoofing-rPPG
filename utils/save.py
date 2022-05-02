@@ -18,5 +18,4 @@ def save_checkpoints(model: Module, epoch: int) -> None:
         os.mkdir('pretrained')
 
     # save the model
-    print(f'saving model to pretrained/model_epoch_{epoch}.pt file')
     save(model, f'pretrained/model_epoch_{epoch}.pt')

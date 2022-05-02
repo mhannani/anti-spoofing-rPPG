@@ -147,10 +147,6 @@ def train_all(device: torch.device, n_epochs: int = 1000, data_path: str = './Da
         p_bar = tqdm(total=len(train_data), bar_format='{l_bar}{bar:20}{r_bar}',
                      unit=' batches', ncols=200, mininterval=0.02, colour='#00ff00')
 
-        # For training statistics
-        cnn_running_loss = []
-        rnn_running_loss = []
-
         for i, (images, labels_d, anchors, label) in enumerate(train_data):
             # Send variables to device
             images = images.to(device)
@@ -160,11 +156,11 @@ def train_all(device: torch.device, n_epochs: int = 1000, data_path: str = './Da
 
             # initialize gradients
             optimizer.zero_grad()
-            print('image shape: ', images.shape)
+            # print('image shape: ', images.shape)
             output_d, output_f = model(images, False, anchors)
 
             # compute the cnn loss
-            print('label_d: ', labels_d.shape)
+            # print('label_d: ', labels_d.shape)
             cnn_loss = criterion(torch.transpose(output_d, 1, 3), labels_d)
 
             label = sample_label(label, device)
@@ -176,27 +172,21 @@ def train_all(device: torch.device, n_epochs: int = 1000, data_path: str = './Da
             cnn_loss.backward(retain_graph=True)
             rnn_loss.backward(retain_graph=True)
 
-            # TODO: Something else
-            # optimizer.step()
+            optimizer.step()
 
             # accumulate loss values
-            cnn_running_loss.append(cnn_loss.item())
-            rnn_running_loss.append(rnn_loss.item())
+            cnn_running_loss = cnn_loss.item()
+            rnn_running_loss = rnn_loss.item()
 
-            print(cnn_loss.item(), i)
             # update the progress bar
             p_bar.set_postfix(
                 epoch=f"{epoch}/{n_epochs}, "
-                      f"cnn_loss: {round(sum(cnn_running_loss) / len(cnn_running_loss), 4)}, "
-                      f"rnn_loss: {round(sum(rnn_running_loss) / len(rnn_running_loss), 4)}",
+                      f"cnn_loss: {round(cnn_running_loss / 5, 4)}, "
+                      f"rnn_loss: {round(rnn_running_loss / 5, 4)}",
                 refresh=True)
 
             # update the progress bar
             p_bar.update()
-
-            # print(f'Epoch: {epoch}/{n_epochs}, iteration: {i}/{len(train_data)}, '
-            #       f'cnn_loss: {round(sum(cnn_running_loss) / len(cnn_running_loss), 4)}, '
-            #       f' rnn_loss: {round(sum(rnn_running_loss) / len(rnn_running_loss), 4)}')
 
         if epoch % 3 == 0:
             # saving model

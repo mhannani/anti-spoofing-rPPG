@@ -18,7 +18,7 @@ class RNN(nn.Module):
         self.hidden_dim = 100
         self.input_dim = 32 * 32
         self.num_layers = 1
-        self.batch_size = 1
+        self.batch_size = 5
 
         self.hidden = (torch.zeros(self.num_layers, self.batch_size, self.hidden_dim).to(device),
                        torch.zeros(self.num_layers, self.batch_size, self.hidden_dim).to(device))
@@ -36,8 +36,11 @@ class RNN(nn.Module):
         # F est de dimension [5,32,32,1]
         f = f.view(5, 1, -1)
 
-        output, self.hidden = self.LSTM(f, self.hidden)
+        output, (hidden, _) = self.LSTM(f, self.hidden)
+
         R = self.fc(output)
         R = torch.fft.fft(R, norm='backward', dim=1)
 
-        return torch.view_as_real(R)  # F[5,1,2]
+        R = torch.view_as_real(R)
+
+        return R # F[5,1,2]
