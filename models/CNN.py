@@ -110,7 +110,7 @@ class CNN(nn.Module):
         D = self.cnn7(X)
         D = self.cnn8(D)
         D = self.cnn9(D)
-        D = self.resize_32(D)
-        T = torch.rand((5, 1, 32, 32), requires_grad=True)
+        D = self.resize_32(D).to(self.device)
+        T = torch.rand((5, 1, 32, 32), requires_grad=True).to(self.device)
 
         return D, T
