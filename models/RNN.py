@@ -20,8 +20,8 @@ class RNN(nn.Module):
         self.num_layers = 1
         self.batch_size = 5
 
-        self.hidden = (torch.zeros(self.num_layers, self.batch_size, self.hidden_dim, device=self.device),
-                       torch.zeros(self.num_layers, self.batch_size, self.hidden_dim, device=self.device))
+        self.hidden = (torch.zeros(self.num_layers, self.batch_size, self.hidden_dim, device=device),
+                       torch.zeros(self.num_layers, self.batch_size, self.hidden_dim, device=device))
         # LSTM cell
         self.LSTM = nn.LSTM(input_size=self.input_dim, hidden_size=self.hidden_dim, num_layers=self.num_layers)
 
@@ -30,17 +30,22 @@ class RNN(nn.Module):
 
     def forward(self, f):
         """
-        Forward pass
+        Forward pass of the RNN network.
         """
 
         # F est de dimension [5,32,32,1]
+
         f = f.view(5, 1, -1)
 
+        # LSTM layer
         output, (hidden, _) = self.LSTM(f, self.hidden)
 
+        # Fully connected layer
         R = self.fc(output)
+
+        # compute the discrete Fourier transform
         R = torch.fft.fft(R, norm='backward', dim=1)
 
         R = torch.view_as_real(R)
 
-        return R # F[5,1,2]
+        return R

@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 import numpy as np
-import torchvision
 from models.CNN import CNN
 from models.RNN import RNN
 
@@ -34,7 +33,6 @@ class CnnRnn(nn.Module):
         rppg = self.RNN(f)
 
         return depth_map, rppg
-
 
 def turning(U, anchors, treshold=0.1):
     U_temp = np.array(U)

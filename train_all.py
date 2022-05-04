@@ -8,5 +8,6 @@ if __name__ == "__main__":
     # read the configuration file
     cfg = read_config_yaml('./config.yaml')
     device = get_device(cfg)
+    print('device: ', device)
 
     train_all(device=device)

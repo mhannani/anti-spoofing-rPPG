@@ -10,6 +10,7 @@ def create_network(resume_training: bool, device: torch.device):
 
     :param resume_training: bool
         True to resume training on previously saved checkpoint
+
     :param device: torch.device
         The torch device to train on
     """
