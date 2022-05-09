@@ -1,5 +1,5 @@
 from torch.nn import Module
-from torch import load
+from torch import load, device
 import os
 import glob
 
@@ -15,7 +15,7 @@ def load_checkpoints(model_path: str) -> Module:
     :return: torch.nn.Module
     """
 
-    return load(model_path)
+    return load(model_path, map_location=device('cpu'))
 
 
 def check_saved_checkpoints(dir_path: str) -> bool:

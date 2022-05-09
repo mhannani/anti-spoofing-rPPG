@@ -12,6 +12,7 @@ def inference(batch, lambda_value: int = 10):
     # load pretrained model
     model = load_last_checkpoints('./pretrained')
     depth_map, rppg = model(batch, turned=False, anchors=None)
-    print(torch.pow(torch.abs(depth_map), 2))
+    score = torch.sqrt(torch.norm(rppg)) + 1.0 * torch.sqrt(torch.norm(depth_map))
 
+    print('score: ', score)
     # return depth_map.shape, rppg.shape

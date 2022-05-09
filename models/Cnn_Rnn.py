@@ -9,7 +9,6 @@ class CnnRnn(nn.Module):
 
     def __init__(self, device):
         super().__init__()
-
         self.threshold = 0.1
         self.CNN = CNN(device)
         self.RNN = RNN(device)
@@ -21,8 +20,8 @@ class CnnRnn(nn.Module):
         depth_map, feature_map = self.CNN(x)
 
         # Non_rigid_registration_layer
-        non_rigid_registration = torch.where(depth_map >= self.threshold, torch.ones(5, 1, 32, 32).to(self.device),
-                                             torch.zeros(5, 1, 32, 32).to(self.device)).to(self.device)
+        non_rigid_registration = torch.where(depth_map >= self.threshold, torch.ones(5, 1, 32, 32),
+                                             torch.zeros(5, 1, 32, 32))
         u = feature_map * non_rigid_registration
 
         if turned:
@@ -34,6 +33,7 @@ class CnnRnn(nn.Module):
 
         return depth_map, rppg
 
+
 def turning(U, anchors, treshold=0.1):
     U_temp = np.array(U)
     height, width, depth = U_temp.shape
@@ -41,6 +41,7 @@ def turning(U, anchors, treshold=0.1):
     for i in range(depth):
         F_temp[:, :, i:i + 1] = rotate(U_temp[:, :, i:i + 1], anchors[:, :, i])
     F = torch.from_numpy(F_temp)
+
     return F
 
 

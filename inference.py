@@ -1,7 +1,9 @@
+import torch
 from torch.utils.data import DataLoader
 from utils.inference import inference
 from utils.NPZ_loader import NPZLoader
 from utils.split import get_sets
+from utils.plot import show_depth_maps
 
 if __name__ == "__main__":
     # Get data
@@ -13,8 +15,15 @@ if __name__ == "__main__":
     # Get train dataloader
     train_data = DataLoader(test_set, batch_size=5)
 
-    a, b, c, d = next(iter(train_data))
-    a = a.to('cuda:0')
+    images, label_d, anchors, label = next(iter(train_data))
 
-    # inference
-    print(inference(a, 12))
+    for i, batch in enumerate(train_data):
+        images, label_d, anchor, label = batch
+
+        # show images in batch
+        # show_depth_maps(batch)
+
+        # inference
+        inference(images, 12)
+
+
